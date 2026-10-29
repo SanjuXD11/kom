@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flutter Code Copy</title>
+<style>
+body {
+    background: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 25px 10px;
+}
+h1 { color: #00ff99; }
+textarea {
+    width: 95%;
+    height: 65vh;
+    background: #1e1e1e;
+    color: #00ff99;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    font: 14px/1.6 monospace;
+    box-sizing: border-box;
+    resize: vertical;
+    text-align: left;
+    white-space: pre;
+}
+.copy-icon {
+    font-size: 55px;
+    cursor: pointer;
+    margin: 15px;
+    display: inline-block;
+}
+.copy-icon:active { transform: scale(0.85); }
+#message { color: #00ff99; }
+</style>
+</head>
+<body>
+<h1>📋 Flutter Code</h1>
+<textarea id="code" spellcheck="false">import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(
+  home: Scaffold(
+    appBar: AppBar(title: Text("Profile App")),
+    body: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ProfileCard(),
+          ElevatedButton(
+            onPressed: () => print("Follow clicked"),
+            child: Text("Follow"),
+          ),
+        ],
+      ),
+    ),
+  ),
+));
+class ProfileCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(Icons.person),
+        title: Text("Komali"),
+        subtitle: Text("komali@example.com"),
+      ),
+    );
+  }
+}</textarea>
+<br>
+<div class="copy-icon" onclick="copyCode()" title="Copy code">📥</div>
+<p id="message">Tap the icon to copy your Flutter code.</p>
+<script>
+async function copyCode() {
+    const code = document.getElementById("code").value;
+    const message = document.getElementById("message");
+    try {
+        await navigator.clipboard.writeText(code);
+    } catch (error) {
+        const box = document.getElementById("code");
+        box.focus();
+        box.select();
+        if (!document.execCommand("copy")) {
+            message.textContent = "Select the code and copy it manually.";
+            return;
+        }
+    }
+    message.textContent = "✅ Code copied successfully!";
+}
+</script>
+</body>
+</html>
